@@ -1,13 +1,13 @@
 # React Assessment - Who's Who
 # Assessment Overview
 
-For this assessment, students are tasked with developing a front-end React application that interface with [Spotify's API] in order to get genre's, artists, and **sample** songs. The user will then be able to listen to songs and guess which artist created it.
+For this assessment, students are tasked with developing a front-end React application that interfaces with [Spotify's API] in order to get genre's, artists, and **sample** songs. The user will then be able to listen to songs and guess which artist created it.
 
 ## Requirements Overview
 
 ##### The *Business Requirements* are located in the [REQUIREMENTS.md](REQUIREMENTS.md) file.
 
-The specification for this assessment is written in a way that resembles the kind of informal requirements document you may recieve on a client site or the level of detail you may have after a few meetings with stakeholders/product owners. It is written from a non-technical viewpoint with no regards for the technical requirements that the project may incur. In order to get a sense for what is required technically, it is recommended that you first go through the ***Business Requirements*** and try to see the end goal from a business point of view. After that, go through it again from a technical perspective and begin mapping out mentally and physically (on paper if you'd like) the 
+The specification for this assessment is written in a way that resembles the kind of informal requirements document you may recieve on a client site or the level of detail you may have after a few meetings with stakeholders/product owners. It is written from a non-technical viewpoint with no regards for the technical requirements that the project may incur. In order to get a sense for what is required technically, it is recommended that you first go through the ***Business Requirements*** and try to see the end goal from a business point of view. After that, go through it again from a technical perspective and begin mapping out mentally and physically (on paper if you'd like) the technical requirements - including API endpoints that you'll need to call, a component hierarchy, and a UI design.
 
 ---
 
