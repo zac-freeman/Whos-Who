@@ -10,7 +10,7 @@ const initialState = {
   errorLoadingCategories: false
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOAD_CATEGORIES_DONE:
       return {
@@ -56,4 +56,3 @@ export const loadCategories = () =>
         return dispatch(loadCategoriesDone(categoryNames))
       })
       .catch(err => dispatch(loadCategoriesFailure(err)))
-

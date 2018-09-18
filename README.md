@@ -25,3 +25,4 @@ This project uses the [`Ducks`](https://github.com/erikras/ducks-modular-redux) 
 
 Reducers (or ducks) in this project are located in their respective `containers/` directory.
 
+This assessment is large and you should use your time wisely. UI design and styling should be your LAST priority. Get the majority of the functionality in the application built along with a basic wireframe of your components and *then* begin thinking about how to present it to a user. A business/product owner/stakeholder would much rather have something that doesn't look pretty, but works, than have something that looks great but doesn't do anything.
