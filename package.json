@@ -40,13 +40,16 @@
     "webpack-dev-server": "^3.1.8"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
+    "react-play-button": "^0.1.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "next",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^3.4.5"
+    "styled-components": "^3.4.5",
+    "whatwg-fetch": "^3.0.0"
   }
 }

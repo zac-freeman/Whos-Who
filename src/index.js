@@ -5,8 +5,11 @@ import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 
 import configureStore from './configureStore'
-
+import { fetchAndStoreAccessToken } from './services/auth'
 import App from './containers/App'
+
+// Fetch and store the Spotify access token in localStorage
+fetchAndStoreAccessToken()
 
 const initialState = {}
 const history = createHistory()
