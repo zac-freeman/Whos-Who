@@ -10,7 +10,7 @@ const initialState = {
   errorLoadingCategories: false
 }
 
-const reducer = (state = initialState, action) => {
+export default function(state = initialState, action) {
   switch (action.type) {
     case LOAD_CATEGORIES_DONE:
       return {
@@ -57,4 +57,3 @@ export const loadCategories = () =>
       })
       .catch(err => dispatch(loadCategoriesFailure(err)))
 
-export default reducer

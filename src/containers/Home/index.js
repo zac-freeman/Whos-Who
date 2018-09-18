@@ -24,7 +24,6 @@ class Home extends React.Component {
         <select onChange={(event) => this.props.selectCategory(event.target.value)}>
           {categories}
         </select>
-        <span>Home</span>
       </div>
     )
   }
