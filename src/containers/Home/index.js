@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import connect from 'react-redux/es/connect/connect'
 
 import { loadCategories, selectCategory } from '../../ducks/config.duck'
+import GameForm from '../../components/GameForm'
 
 class Home extends React.Component {
   componentDidMount () {
     this.props.loadCategories()
+  }
+
+  submit = selections => {
+    console.log(selections)
   }
 
   render () {
@@ -20,16 +25,17 @@ class Home extends React.Component {
       return <span>Loading categories...</span>
     }
     if (this.props.errorLoadingCategories) {
-      return <span>Error loading categories</span>
+      return <span>Error loading categories.</span>
     }
 
     return (
       <div>
-        <select
+        <select // TODO: move this into GameForm component
           onChange={event => this.props.selectCategory(event.target.value)}
         >
           {categories}
         </select>
+        <GameForm onSubmit={this.submit} />
       </div>
     )
   }
