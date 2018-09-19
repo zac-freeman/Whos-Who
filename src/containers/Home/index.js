@@ -10,18 +10,24 @@ class Home extends React.Component {
   }
 
   render () {
-    const categories = this.props.categories.map(
-      category => (
-        <option
-          key={category}
-          value={category}>{category}
-        </option>
-      )
-    )
+    const categories = this.props.categories.map(category => (
+      <option key={category} value={category}>
+        {category}
+      </option>
+    ))
+
+    if (this.props.loadingCategories) {
+      return <span>Loading categories...</span>
+    }
+    if (this.props.errorLoadingCategories) {
+      return <span>Error loading categories</span>
+    }
 
     return (
       <div>
-        <select onChange={(event) => this.props.selectCategory(event.target.value)}>
+        <select
+          onChange={event => this.props.selectCategory(event.target.value)}
+        >
           {categories}
         </select>
       </div>
@@ -32,14 +38,18 @@ class Home extends React.Component {
 Home.propTypes = {
   loadCategories: PropTypes.func.isRequired,
   selectCategory: PropTypes.func.isRequired,
-  categories: PropTypes.array
+  categories: PropTypes.array,
+  loadingCategories: PropTypes.bool.isRequired,
+  errorLoadingCategories: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  categories: state.config.categories
+const mapStateToProps = state => ({
+  categories: state.config.categories,
+  loadingCategories: state.config.loadingCategories,
+  errorLoadingCategories: state.config.errorLoadingCategories
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   loadCategories: _ => dispatch(loadCategories()),
   selectCategory: evt => dispatch(selectCategory(evt))
 })
