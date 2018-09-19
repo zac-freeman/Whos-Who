@@ -1,5 +1,6 @@
 import { fetchCategories } from '../services/api'
 
+// TODO: set max line length to 100
 export const LOAD_CATEGORIES_BEGIN =
   'cooksys/whos-who/Home/LOAD_CATEGORIES_BEGIN'
 export const LOAD_CATEGORIES_FAILURE =
@@ -8,11 +9,15 @@ export const LOAD_CATEGORIES_DONE = 'cooksys/whos-who/Home/LOAD_CATEGORIES_DONE'
 export const LOAD_CATEGORIES_UPDATE =
   'cooksys/whos-who/Home/LOAD_CATEGORIES_UPDATE'
 export const SELECT_CATEGORY = 'cooksys/whos-who/Home/SELECT_CATEGORY'
+export const SET_GAME_DIMENSIONS = 'cooksys/whos-who/Home/SET_GAME_DIMENSIONS'
 
 const initialState = {
   categories: [],
   errorLoadingCategories: false,
-  loadingCategories: true
+  loadingCategories: true,
+  selectedCategory: undefined,
+  songCount: 0,
+  artistCount: 0
 }
 
 export default function (state = initialState, action) {
@@ -47,6 +52,19 @@ export default function (state = initialState, action) {
         ...state,
         selectedCategory: action.payload
       }
+    case SET_GAME_DIMENSIONS:
+      console.log(
+        'Game Dimensions set to: ' +
+          action.payload.songCount +
+          ' songs and ' +
+          action.payload.artistCount +
+          ' artist(s).'
+      )
+      return {
+        ...state,
+        songCount: action.payload.songCount,
+        artistCount: action.payload.artistCount
+      }
     default:
       return state
   }
@@ -79,3 +97,8 @@ export const loadCategories = () => dispatch => {
     })
     .catch(err => dispatch(loadCategoriesFailure(err)))
 }
+
+export const setGameDimensions = (songCount, artistCount) => ({
+  type: SET_GAME_DIMENSIONS,
+  payload: { songCount, artistCount }
+})

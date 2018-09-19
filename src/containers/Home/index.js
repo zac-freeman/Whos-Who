@@ -1,9 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import connect from 'react-redux/es/connect/connect'
+import connect from 'react-redux/es/connect/connect' // TODO: whats going on here
 
-import { loadCategories, selectCategory } from '../../ducks/config.duck'
-import GameForm from '../../components/GameForm'
+import {
+  loadCategories,
+  selectCategory,
+  setGameDimensions
+} from '../../ducks/config.duck'
+import ConfigForm from '../../components/ConfigForm'
 
 class Home extends React.Component {
   componentDidMount () {
@@ -11,7 +15,7 @@ class Home extends React.Component {
   }
 
   submit = selections => {
-    console.log(selections)
+    this.props.setGameDimensions(selections.songCount, selections.artistCount)
   }
 
   render () {
@@ -20,6 +24,11 @@ class Home extends React.Component {
         {category}
       </option>
     ))
+    categories.unshift(
+      <option key='Random' value='Random'>
+        Random
+      </option>
+    )
 
     if (this.props.loadingCategories) {
       return <span>Loading categories...</span>
@@ -30,12 +39,12 @@ class Home extends React.Component {
 
     return (
       <div>
-        <select // TODO: move this into GameForm component
+        <select // TODO: move this select form into GameForm component
           onChange={event => this.props.selectCategory(event.target.value)}
         >
           {categories}
         </select>
-        <GameForm onSubmit={this.submit} />
+        <ConfigForm onSubmit={this.submit} />
       </div>
     )
   }
@@ -44,6 +53,7 @@ class Home extends React.Component {
 Home.propTypes = {
   loadCategories: PropTypes.func.isRequired,
   selectCategory: PropTypes.func.isRequired,
+  setGameDimensions: PropTypes.func.isRequired,
   categories: PropTypes.array,
   loadingCategories: PropTypes.bool.isRequired,
   errorLoadingCategories: PropTypes.bool.isRequired
@@ -57,7 +67,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadCategories: _ => dispatch(loadCategories()),
-  selectCategory: evt => dispatch(selectCategory(evt))
+  selectCategory: evt => dispatch(selectCategory(evt)),
+  setGameDimensions: (songCount, artistCount) =>
+    dispatch(setGameDimensions(songCount, artistCount))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

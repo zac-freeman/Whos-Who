@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Field, reduxForm } from 'redux-form'
 
-let GameForm = props => {
+let ConfigForm = props => {
   const { handleSubmit } = props
   return (
     <form onSubmit={handleSubmit}>
@@ -32,16 +32,16 @@ let GameForm = props => {
   )
 }
 
-GameForm = reduxForm({
+ConfigForm = reduxForm({
   form: 'game',
   initialValues: {
     songCount: '2',
     artistCount: '1'
   }
-})(GameForm)
+})(ConfigForm)
 
-GameForm.propTypes = {
-  handleSubmit: PropTypes.func // TODO: fix this
+ConfigForm.propTypes = {
+  handleSubmit: PropTypes.func // TODO: fix this; handleSubmit is undefined in ConfigForm
 }
 
-export default GameForm
+export default ConfigForm
