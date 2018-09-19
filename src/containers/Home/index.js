@@ -36,7 +36,7 @@ Home.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  categories: state.home.categories
+  categories: state.config.categories
 })
 
 const mapDispatchToProps = (dispatch) => ({

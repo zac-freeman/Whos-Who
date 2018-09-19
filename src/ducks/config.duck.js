@@ -1,9 +1,10 @@
 import { fetchCategories } from '../services/api'
 
-export const LOAD_CATEGORIES_BEGIN = 'cooksys/whos-who/App/LOAD_CATEGORIES_BEGIN'
-export const LOAD_CATEGORIES_FAILURE = 'cooksys/whos-who/App/LOAD_CATEGORIES_FAILURE'
-export const LOAD_CATEGORIES_DONE = 'cooksys/whos-who/App/LOAD_CATEGORIES_DONE'
-export const SELECT_CATEGORY = 'cooksys/whos-who/App/SELECT_CATEGORY'
+export const LOAD_CATEGORIES_BEGIN = 'cooksys/whos-who/Home/LOAD_CATEGORIES_BEGIN'
+export const LOAD_CATEGORIES_FAILURE = 'cooksys/whos-who/Home/LOAD_CATEGORIES_FAILURE'
+export const LOAD_CATEGORIES_DONE = 'cooksys/whos-who/Home/LOAD_CATEGORIES_DONE'
+export const LOAD_CATEGORIES_UPDATE = 'cooksys/whos-who/Home/LOAD_CATEGORIES_UPDATE'
+export const SELECT_CATEGORY = 'cooksys/whos-who/Home/SELECT_CATEGORY'
 
 const initialState = {
   categories: [],
