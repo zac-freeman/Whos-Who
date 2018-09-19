@@ -1,4 +1,4 @@
-import { fetchCategories } from '../../services/api'
+import { fetchCategories } from '../services/api'
 
 export const LOAD_CATEGORIES_BEGIN = 'cooksys/whos-who/App/LOAD_CATEGORIES_BEGIN'
 export const LOAD_CATEGORIES_FAILURE = 'cooksys/whos-who/App/LOAD_CATEGORIES_FAILURE'

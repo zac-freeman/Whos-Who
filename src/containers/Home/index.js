@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import connect from 'react-redux/es/connect/connect'
 
-import { loadCategories, selectCategory } from './duck'
+import { loadCategories, selectCategory } from '../../ducks/config.duck'
 
 class Home extends React.Component {
   componentDidMount () {

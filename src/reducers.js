@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from 'react-router-redux'
 
-import homeReducer from './containers/Home/duck'
+import configReducer from './ducks/config.duck'
 import { combineReducers } from 'redux'
 
 const routeInitialState = {
@@ -22,6 +22,6 @@ export function routeReducer (state = routeInitialState, action) {
 export default function createReducer () {
   return combineReducers({
     route: routeReducer,
-    home: homeReducer
+    config: configReducer
   })
 }
