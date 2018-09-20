@@ -21,6 +21,13 @@ class Home extends React.Component {
   }
 
   render () {
+    if (this.props.loadingCategories) {
+      return <span>Loading categories...</span>
+    }
+    if (this.props.errorLoadingCategories) {
+      return <span>Error loading categories.</span>
+    }
+
     const categories = this.props.categories.map(category => (
       <option key={category} value={category}>
         {category}
@@ -31,14 +38,6 @@ class Home extends React.Component {
         Random
       </option>
     )
-
-    if (this.props.loadingCategories) {
-      return <span>Loading categories...</span>
-    }
-    if (this.props.errorLoadingCategories) {
-      return <span>Error loading categories.</span>
-    }
-
     return (
       <div>
         <select // TODO: move this select form into GameForm component
@@ -59,7 +58,7 @@ Home.propTypes = {
   categories: PropTypes.array,
   loadingCategories: PropTypes.bool.isRequired,
   errorLoadingCategories: PropTypes.bool.isRequired,
-  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

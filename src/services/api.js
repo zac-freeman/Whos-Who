@@ -14,6 +14,23 @@ export function fetchCategories () {
   })
 }
 
+export function fetchArtists (category) {
+  return fetchFromSpotify({
+    endpoint: 'search',
+    params: {
+      q: `genre:${category}`,
+      type: 'artist',
+      limit: '30'
+    }
+  })
+}
+
+export function fetchSongsByArtist (id) {
+  return fetchFromSpotify({
+    endpoint: `artists/${id}/top-tracks?country=US`
+  })
+}
+
 export function fetchFromSpotify ({ endpoint, params }) {
   const spotifyToken = getAccessTokenFromLocalStorage()
   let url = [SPOTIFY_ROOT, endpoint].join('/')
@@ -23,6 +40,6 @@ export function fetchFromSpotify ({ endpoint, params }) {
     url += `?${paramString}`
   }
 
-  const options = { headers: { 'Authorization': `Bearer ${spotifyToken}` } }
+  const options = { headers: { Authorization: `Bearer ${spotifyToken}` } }
   return request(url, options)
 }

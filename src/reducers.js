@@ -2,6 +2,7 @@ import { LOCATION_CHANGE } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
 
 import configReducer from './ducks/config.duck'
+import gameReducer from './ducks/game.duck'
 import { combineReducers } from 'redux'
 
 const routeInitialState = {
@@ -24,6 +25,7 @@ export default function createReducer () {
   return combineReducers({
     route: routeReducer,
     config: configReducer,
+    game: gameReducer,
     form: formReducer
   })
 }

@@ -13,8 +13,8 @@ let ConfigForm = props => {
           name='songCount'
           component='input'
           type='number'
-          min='2'
-          max='4'
+          min='1'
+          max='3'
         />
       </div>
       <div>
@@ -23,8 +23,8 @@ let ConfigForm = props => {
           name='artistCount'
           component='input'
           type='number'
-          min='1'
-          max='3'
+          min='2'
+          max='4'
         />
       </div>
       <button type='submit'>Generate</button>
@@ -35,8 +35,8 @@ let ConfigForm = props => {
 ConfigForm = reduxForm({
   form: 'config',
   initialValues: {
-    songCount: '2',
-    artistCount: '1'
+    songCount: '1',
+    artistCount: '2'
   }
 })(ConfigForm)
 

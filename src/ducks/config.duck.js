@@ -3,22 +3,22 @@ import { fetchCategories } from '../services/api'
 // TODO: set max line length to 100
 export const LOAD_CATEGORIES_BEGIN =
   'cooksys/whos-who/Home/LOAD_CATEGORIES_BEGIN'
+export const LOAD_CATEGORIES_DONE = 'cooksys/whos-who/Home/LOAD_CATEGORIES_DONE'
 export const LOAD_CATEGORIES_FAILURE =
   'cooksys/whos-who/Home/LOAD_CATEGORIES_FAILURE'
-export const LOAD_CATEGORIES_DONE = 'cooksys/whos-who/Home/LOAD_CATEGORIES_DONE'
 export const LOAD_CATEGORIES_UPDATE =
   'cooksys/whos-who/Home/LOAD_CATEGORIES_UPDATE'
 export const SELECT_CATEGORY = 'cooksys/whos-who/Home/SELECT_CATEGORY'
 export const SET_GAME_DIMENSIONS = 'cooksys/whos-who/Home/SET_GAME_DIMENSIONS'
 
 const initialState = {
-  // array of strings
+  // array of strings of category names
   categories: [],
   errorLoadingCategories: false,
   loadingCategories: true,
   selectedCategory: 'Random',
-  songCount: 2,
-  artistCount: 1
+  songCount: 1,
+  artistCount: 2
 }
 
 export default function (state = initialState, action) {
@@ -57,9 +57,9 @@ export default function (state = initialState, action) {
       console.log(
         'Game Dimensions set to: ' +
           action.payload.songCount +
-          ' songs and ' +
+          ' song(s) and ' +
           action.payload.artistCount +
-          ' artist(s).'
+          ' artists.'
       )
       return {
         ...state,
@@ -87,6 +87,7 @@ const loadCategoriesDone = categories => ({
 
 const loadCategoriesFailure = () => ({
   type: LOAD_CATEGORIES_FAILURE
+  // TODO: add error payload
 })
 
 export const loadCategories = () => dispatch => {
@@ -94,7 +95,7 @@ export const loadCategories = () => dispatch => {
   return fetchCategories()
     .then(({ categories }) => {
       const categoryNames = categories.items.map(c => c.name)
-      return dispatch(loadCategoriesDone(categoryNames))
+      dispatch(loadCategoriesDone(categoryNames))
     })
     .catch(err => dispatch(loadCategoriesFailure(err)))
 }
