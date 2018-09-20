@@ -33,7 +33,7 @@ let ConfigForm = props => {
 }
 
 ConfigForm = reduxForm({
-  form: 'game',
+  form: 'config',
   initialValues: {
     songCount: '2',
     artistCount: '1'

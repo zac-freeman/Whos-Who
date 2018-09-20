@@ -12,12 +12,13 @@ export const SELECT_CATEGORY = 'cooksys/whos-who/Home/SELECT_CATEGORY'
 export const SET_GAME_DIMENSIONS = 'cooksys/whos-who/Home/SET_GAME_DIMENSIONS'
 
 const initialState = {
+  // array of strings
   categories: [],
   errorLoadingCategories: false,
   loadingCategories: true,
-  selectedCategory: undefined,
-  songCount: 0,
-  artistCount: 0
+  selectedCategory: 'Random',
+  songCount: 2,
+  artistCount: 1
 }
 
 export default function (state = initialState, action) {

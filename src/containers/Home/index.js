@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import connect from 'react-redux/es/connect/connect' // TODO: whats going on here
+import { withRouter } from 'react-router'
 
 import {
   loadCategories,
@@ -16,6 +17,7 @@ class Home extends React.Component {
 
   submit = selections => {
     this.props.setGameDimensions(selections.songCount, selections.artistCount)
+    this.props.history.push('/game')
   }
 
   render () {
@@ -56,7 +58,8 @@ Home.propTypes = {
   setGameDimensions: PropTypes.func.isRequired,
   categories: PropTypes.array,
   loadingCategories: PropTypes.bool.isRequired,
-  errorLoadingCategories: PropTypes.bool.isRequired
+  errorLoadingCategories: PropTypes.bool.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired
 }
 
 const mapStateToProps = state => ({
@@ -72,4 +75,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setGameDimensions(songCount, artistCount))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))
