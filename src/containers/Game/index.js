@@ -4,7 +4,7 @@ import connect from 'react-redux/es/connect/connect'
 import ReactAudioPlayer from 'react-audio-player'
 import { withRouter } from 'react-router'
 
-import { ArtistChoices } from '../../components/ArtistChoices'
+import { ArtistChoice } from '../../components/ArtistChoice'
 import { ResultsPage } from '../../components/ResultsPage'
 
 import { loadContent, selectArtist, resetState } from '../../ducks/game.duck'
@@ -56,12 +56,13 @@ class Game extends React.Component {
     const songs = this.props.songs.map(song => (
       <ReactAudioPlayer key={song} src={song} autoPlay={false} controls />
     ))
-    const choices = (
-      <ArtistChoices
-        artists={this.props.artists}
-        handleChange={event => this.props.selectArtist(event.target.value)}
+    const choices = this.props.artists.map(artist => (
+      <ArtistChoice
+        key={artist.name}
+        artist={artist}
+        handleClick={_ => this.props.selectArtist(artist.name)}
       />
-    )
+    ))
 
     return (
       <div>

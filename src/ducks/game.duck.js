@@ -119,7 +119,10 @@ export const loadContent = (category, songCount, artistCount) => dispatch => {
             return [...acc]
           }, []),
           correctArtist.name,
-          artists.map(artist => artist.name)
+          artists.map(artist => ({
+            name: artist.name,
+            image: artist.images[0].url
+          }))
         )
       )
     })
