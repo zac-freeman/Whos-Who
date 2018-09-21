@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import connect from 'react-redux/es/connect/connect' // TODO: whats going on here
+import connect from 'react-redux/es/connect/connect'
 import ReactAudioPlayer from 'react-audio-player'
 import { withRouter } from 'react-router'
+
+import { ArtistChoices } from '../../components/ArtistChoices'
+import { ResultsPage } from '../../components/ResultsPage'
 
 import { loadContent, selectArtist, resetState } from '../../ducks/game.duck'
 
@@ -41,53 +44,23 @@ class Game extends React.Component {
       )
     }
 
-    if (
-      this.props.selectedArtist === this.props.correctArtist &&
-      this.props.selectedArtist !== ''
-    ) {
+    if (this.props.selectedArtist !== '') {
       return (
-        <div>
-          <h1>YOU WIN!</h1>
-          <button type='submit' onClick={_ => this.reset()}>
-            Play Again?
-          </button>
-        </div>
-      )
-    }
-    if (
-      this.props.selectedArtist !== this.props.correctArtist &&
-      this.props.selectedArtist !== ''
-    ) {
-      return (
-        <div>
-          <h1>YOU DID NOT WIN!</h1>
-          <button type='submit' onClick={_ => this.reset()}>
-            Try Again?
-          </button>
-        </div>
+        <ResultsPage
+          results={this.props.selectedArtist === this.props.correctArtist}
+          handleClick={_ => this.reset()}
+        />
       )
     }
 
     const songs = this.props.songs.map(song => (
       <ReactAudioPlayer key={song} src={song} autoPlay={false} controls />
     ))
-
-    const artists = this.props.artists.map(artist => (
-      <option key={artist} value={artist}>
-        {artist}
-      </option>
-    ))
-
-    artists.unshift(
-      <option key='Artist' value='Artist'>
-        Artist
-      </option>
-    )
-
     const choices = (
-      <select onChange={event => this.props.selectArtist(event.target.value)}>
-        {artists}
-      </select>
+      <ArtistChoices
+        artists={this.props.artists}
+        handleChange={event => this.props.selectArtist(event.target.value)}
+      />
     )
 
     return (

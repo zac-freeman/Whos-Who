@@ -20,7 +20,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case LOAD_CONTENT_BEGIN:
-      console.log('Loading content...')
+      console.log(`Loading content from ${action.payload}...`)
       return {
         ...state,
         errorLoadingContent: false,
@@ -58,8 +58,9 @@ export default function (state = initialState, action) {
   }
 }
 
-const loadContentBegin = () => ({
-  type: LOAD_CONTENT_BEGIN
+const loadContentBegin = category => ({
+  type: LOAD_CONTENT_BEGIN,
+  payload: category
 })
 
 const loadContentDone = (songs, correctArtist, artists) => ({
@@ -82,7 +83,7 @@ export const resetState = () => ({
 })
 
 export const loadContent = (category, songCount, artistCount) => dispatch => {
-  dispatch(loadContentBegin())
+  dispatch(loadContentBegin(category))
   return fetchArtists(category)
     .then(response => {
       const artists = response.artists.items
@@ -107,8 +108,6 @@ export const loadContent = (category, songCount, artistCount) => dispatch => {
       const previews = songs
         .map(song => song.preview_url)
         .filter(url => url != null)
-      console.log(songs)
-      console.log(previews)
       const previewIndices = generateIndices(songCount, previews.length)
 
       dispatch(
