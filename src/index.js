@@ -8,6 +8,8 @@ import configureStore from './configureStore'
 import { fetchAndStoreAccessToken } from './services/auth'
 import App from './containers/App'
 
+import './index.css'
+
 // Fetch and store the Spotify access token in localStorage
 fetchAndStoreAccessToken()
 

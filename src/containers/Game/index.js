@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import connect from 'react-redux/es/connect/connect'
 import ReactAudioPlayer from 'react-audio-player'
 import { withRouter } from 'react-router'
@@ -8,6 +9,12 @@ import { ArtistChoice } from '../../components/ArtistChoice'
 import { ResultsPage } from '../../components/ResultsPage'
 
 import { loadContent, selectArtist, resetState } from '../../ducks/game.duck'
+
+const ChoiceList = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`
 
 class Game extends React.Component {
   componentDidMount () {
@@ -67,7 +74,7 @@ class Game extends React.Component {
     return (
       <div>
         {songs}
-        {choices}
+        <ChoiceList>{choices}</ChoiceList>
       </div>
     )
   }
