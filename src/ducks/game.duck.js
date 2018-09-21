@@ -6,6 +6,7 @@ export const LOAD_CONTENT_DONE = 'cooksys/whos-who/Home/LOAD_CONTENT_DONE'
 export const LOAD_CONTENT_FAILURE = 'cooksys/whos-who/Home/LOAD_CONTENT_FAILURE'
 export const LOAD_CONTENT_UPDATE = 'cooksys/whos-who/Home/LOAD_CONTENT_UPDATE'
 export const SELECT_ARTIST = 'cooksys/whos-who/Home/SELECT_ARTIST'
+export const RESET_STATE = 'cooksys/whos-who/Home/RESET_STATE'
 
 const initialState = {
   songs: [],
@@ -48,6 +49,10 @@ export default function (state = initialState, action) {
         ...state,
         selectedArtist: action.payload
       }
+    case RESET_STATE:
+      return {
+        ...initialState
+      }
     default:
       return state
   }
@@ -70,6 +75,10 @@ const loadContentFailure = () => ({
 export const selectArtist = selectedArtist => ({
   type: SELECT_ARTIST,
   payload: selectedArtist
+})
+
+export const resetState = () => ({
+  type: RESET_STATE
 })
 
 export const loadContent = (category, songCount, artistCount) => dispatch => {
