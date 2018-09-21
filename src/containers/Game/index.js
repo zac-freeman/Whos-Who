@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import connect from 'react-redux/es/connect/connect' // TODO: whats going on here
+import ReactAudioPlayer from 'react-audio-player'
 
-import { loadContent } from '../../ducks/game.duck'
-import ArtistSelectForm from '../../components/ArtistSelectForm'
+import { loadContent, selectArtist } from '../../ducks/game.duck'
 
 class Game extends React.Component {
   componentDidMount () {
     let category = this.props.selectedCategory
     if (category === 'Random') {
-      let index = 1 + Math.floor(Math.random() * this.props.categories.length)
+      let index =
+        1 + Math.floor(Math.random() * (this.props.categories.length - 1))
       category = this.props.categories[index]
     }
     this.props.loadContent(
@@ -28,9 +29,7 @@ class Game extends React.Component {
     }
 
     const songs = this.props.songs.map(song => (
-      <span key={song}>
-        {song}
-      </span>
+      <ReactAudioPlayer key={song} src={song} autoPlay={false} controls />
     ))
 
     const artists = this.props.artists.map(artist => (
@@ -39,14 +38,21 @@ class Game extends React.Component {
       </option>
     ))
 
+    artists.unshift(
+      <option key='Artist' value='Artist'>
+        Artist
+      </option>
+    )
+
     const choices = (
-      <select onChange={event => console.log(event.target.value)}>
+      <select onChange={event => this.props.selectArtist(event.target.value)}>
         {artists}
       </select>
     )
 
     return (
       <div>
+        {songs}
         {choices}
       </div>
     )
@@ -55,6 +61,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   loadContent: PropTypes.func.isRequired,
+  selectArtist: PropTypes.func.isRequired,
   songs: PropTypes.array.isRequired,
   artists: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
@@ -79,7 +86,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadContent: (category, songCount, artistCount) =>
-    dispatch(loadContent(category, songCount, artistCount))
+    dispatch(loadContent(category, songCount, artistCount)),
+  selectArtist: selectedArtist => dispatch(selectArtist(selectedArtist))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)

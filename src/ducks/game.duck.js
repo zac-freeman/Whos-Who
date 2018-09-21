@@ -5,10 +5,12 @@ export const LOAD_CONTENT_BEGIN = 'cooksys/whos-who/Home/LOAD_CONTENT_BEGIN'
 export const LOAD_CONTENT_DONE = 'cooksys/whos-who/Home/LOAD_CONTENT_DONE'
 export const LOAD_CONTENT_FAILURE = 'cooksys/whos-who/Home/LOAD_CONTENT_FAILURE'
 export const LOAD_CONTENT_UPDATE = 'cooksys/whos-who/Home/LOAD_CONTENT_UPDATE'
+export const SELECT_ARTIST = 'cooksys/whos-who/Home/SELECT_ARTIST'
 
 const initialState = {
   songs: [],
   artists: [],
+  selectedArtist: '',
   correctArtist: '',
   errorLoadingContent: false,
   loadingContent: true
@@ -21,10 +23,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         errorLoadingContent: false,
-        loadingContent: true,
-        songs: initialState.songs,
-        correctArtist: initialState.correctArtist,
-        artists: initialState.artists
+        loadingContent: true
       }
     case LOAD_CONTENT_DONE:
       console.log('Loaded content successfully!')
@@ -41,10 +40,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         errorLoadingContent: true,
-        loadingContent: false,
-        songs: initialState.songs,
-        correctArtist: initialState.correctState,
-        artists: initialState.artists
+        loadingContent: false
+      }
+    case SELECT_ARTIST:
+      console.log(action.payload + ' selected.')
+      return {
+        ...state,
+        selectedArtist: action.payload
       }
     default:
       return state
@@ -63,6 +65,11 @@ const loadContentDone = (songs, correctArtist, artists) => ({
 const loadContentFailure = () => ({
   type: LOAD_CONTENT_FAILURE
   // TODO: add error payload
+})
+
+export const selectArtist = selectedArtist => ({
+  type: SELECT_ARTIST,
+  payload: selectedArtist
 })
 
 export const loadContent = (category, songCount, artistCount) => dispatch => {
@@ -88,18 +95,21 @@ export const loadContent = (category, songCount, artistCount) => dispatch => {
       ])
     })
     .then(([songs, correctArtist, artists]) => {
-      const songIndices = generateIndices(songCount, songs.length)
+      const previews = songs
+        .map(song => song.preview_url)
+        .filter(url => url != null)
+      console.log(songs)
+      console.log(previews)
+      const previewIndices = generateIndices(songCount, previews.length)
 
       dispatch(
         loadContentDone(
-          songs
-            .reduce((acc, song, index) => {
-              if (songIndices.includes(index)) {
-                return [...acc, song]
-              }
-              return [...acc]
-            }, [])
-            .map(song => song.name),
+          previews.reduce((acc, preview, index) => {
+            if (previewIndices.includes(index)) {
+              return [...acc, preview]
+            }
+            return [...acc]
+          }, []),
           correctArtist.name,
           artists.map(artist => artist.name)
         )
@@ -110,7 +120,7 @@ export const loadContent = (category, songCount, artistCount) => dispatch => {
 
 const generateIndices = (count, max) => {
   let indices = []
-  if (count >= max) {
+  if (count >= max || max === 0) {
     while (indices.length < max) {
       indices.push(indices.length)
     }
