@@ -7,9 +7,7 @@ export const LOAD_CONTENT_FAILURE = 'cooksys/whos-who/Home/LOAD_CONTENT_FAILURE'
 export const LOAD_CONTENT_UPDATE = 'cooksys/whos-who/Home/LOAD_CONTENT_UPDATE'
 
 const initialState = {
-  // array of strings of song names
   songs: [],
-  // array of strings of artist names
   artists: [],
   correctArtist: '',
   errorLoadingContent: false,

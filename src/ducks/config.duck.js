@@ -12,7 +12,6 @@ export const SELECT_CATEGORY = 'cooksys/whos-who/Home/SELECT_CATEGORY'
 export const SET_GAME_DIMENSIONS = 'cooksys/whos-who/Home/SET_GAME_DIMENSIONS'
 
 const initialState = {
-  // array of strings of category names
   categories: [],
   errorLoadingCategories: false,
   loadingCategories: true,

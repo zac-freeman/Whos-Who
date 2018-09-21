@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import connect from 'react-redux/es/connect/connect' // TODO: whats going on here
 
 import { loadContent } from '../../ducks/game.duck'
+import ArtistSelectForm from '../../components/ArtistSelectForm'
 
 class Game extends React.Component {
   componentDidMount () {
@@ -31,13 +32,22 @@ class Game extends React.Component {
         {song}
       </span>
     ))
+
     const artists = this.props.artists.map(artist => (
-      <span key={artist}>{artist}</span>
+      <option key={artist} value={artist}>
+        {artist}
+      </option>
     ))
+
+    const choices = (
+      <select onChange={event => console.log(event.target.value)}>
+        {artists}
+      </select>
+    )
+
     return (
       <div>
-        <div>{songs}</div>
-        <div>{artists}</div>
+        {choices}
       </div>
     )
   }

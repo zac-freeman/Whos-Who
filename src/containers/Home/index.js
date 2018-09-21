@@ -16,6 +16,7 @@ class Home extends React.Component {
   }
 
   submit = selections => {
+    console.log(selections)
     this.props.setGameDimensions(selections.songCount, selections.artistCount)
     this.props.history.push('/game')
   }
@@ -40,7 +41,7 @@ class Home extends React.Component {
     )
     return (
       <div>
-        <select // TODO: move this select form into GameForm component
+        <select
           onChange={event => this.props.selectCategory(event.target.value)}
         >
           {categories}
